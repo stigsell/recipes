@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,16 +12,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
 
+
+// Components in other files
+import Menu from './Menu'
 
 const styles = theme => ({
-  appBar: {
-    position: 'relative',
-  },
-  grow: {
-    flexGrow: 1,
-  },
   icon: {
     marginRight: theme.spacing.unit * 2,
   },
@@ -46,9 +41,6 @@ const styles = theme => ({
       marginLeft: 'auto',
       marginRight: 'auto',
     },
-  },
-  palette: {
-    primary: green,
   },
   cardGrid: {
     padding: `${theme.spacing.unit * 8}px 0`,
@@ -78,15 +70,7 @@ function Album(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-
-          <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
-            Recipes
-          </Typography>
-          <Button color="secondary" variant="contained" >Add Recipe</Button>
-        </Toolbar>
-      </AppBar>
+      <Menu />
       <main>
         {/* Hero unit */}
         <div className={classes.heroUnit}>
