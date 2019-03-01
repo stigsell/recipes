@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
+// Router
+import { Link } from 'react-router-dom'
+
 const styles = theme => ({
   root: {
   	flexGrow: 1,
@@ -29,7 +32,8 @@ class Menu extends React.Component {
 					<Grid justify="space-between" container spacing={24}>
 						<Grid item>
 							<Typography variant="h6" color="inherit" className={this.props.classes.grow}>
-								Recipes</Typography>
+								<Link to='/'>Recipes</Link>
+							</Typography>
 						</Grid>
 						<Grid item>
 							<Button color="secondary" variant="contained">Add Recipe</Button>

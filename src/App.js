@@ -8,7 +8,8 @@ import 'typeface-roboto';
 
 // Components in other files
 import Menu from './Menu'
-import Content from './Content'
+import Main from './Main'
+//import Content from './Content'
 import Footer from './Footer'
 
 const styles = theme => ({
@@ -24,7 +25,7 @@ function Album(props) {
     <React.Fragment>
       <CssBaseline />
       <Menu />
-      <Content />
+      <Main />
       <Footer />
     </React.Fragment>
   );
