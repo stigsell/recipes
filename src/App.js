@@ -12,10 +12,16 @@ import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
+
 
 const styles = theme => ({
   appBar: {
     position: 'relative',
+  },
+  grow: {
+    flexGrow: 1,
   },
   icon: {
     marginRight: theme.spacing.unit * 2,
@@ -40,6 +46,9 @@ const styles = theme => ({
       marginLeft: 'auto',
       marginRight: 'auto',
     },
+  },
+  palette: {
+    primary: green,
   },
   cardGrid: {
     padding: `${theme.spacing.unit * 8}px 0`,
@@ -72,9 +81,10 @@ function Album(props) {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
 
-          <Typography variant="h6" color="inherit" noWrap>
+          <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
             Recipes
           </Typography>
+          <Button color="secondary" variant="contained" >Add Recipe</Button>
         </Toolbar>
       </AppBar>
       <main>
@@ -87,20 +97,7 @@ function Album(props) {
             <Typography variant="h6" align="center" color="textSecondary" paragraph>
               These are some of my favorite recipes. Enjoy!
             </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={16} justify="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
+            
           </div>
         </div>
         <div className={classNames(classes.layout, classes.cardGrid)}>
