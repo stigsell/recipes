@@ -16,6 +16,7 @@ const styles = theme => ({
   },
   grow: {
   	flexGrow: 1,
+  	textDecoration: 'none',
   },
 });
 
@@ -31,12 +32,12 @@ class Menu extends React.Component {
 				<Toolbar>
 					<Grid justify="space-between" container spacing={24}>
 						<Grid item>
-							<Typography variant="h6" color="inherit" className={this.props.classes.grow}>
-								<Link to='/'>Recipes</Link>
+							<Typography variant="h6" color="inherit" component={Link} to="/" className={this.props.classes.grow}>
+								Recipes
 							</Typography>
 						</Grid>
 						<Grid item>
-							<Button color="secondary" variant="contained">Add Recipe</Button>
+							<Button color="secondary" variant="contained" component={Link} to="/add-recipe">Add Recipe</Button>
 						</Grid>
 					</Grid>
 				</Toolbar>
