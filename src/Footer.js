@@ -17,7 +17,7 @@ class Footer extends React.Component {
 	}
 	render() {
 		return (
-			<footer className={this.classes.footer}>
+			<footer className={this.props.classes.footer}>
 		        <Typography variant="h6" align="center" gutterBottom>
 		          Recipes
 		        </Typography>

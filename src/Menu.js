@@ -14,9 +14,6 @@ const styles = theme => ({
   grow: {
   	flexGrow: 1,
   },
-  button: {
-
-  }
 });
 
 class Menu extends React.Component {
@@ -26,12 +23,12 @@ class Menu extends React.Component {
 	}
 	render() {
 		return (
-		<div className={this.classes.root}>
+		<div className={this.props.classes.root}>
 			<AppBar position="static">
 				<Toolbar>
 					<Grid justify="space-between" container spacing={24}>
 						<Grid item>
-							<Typography variant="h6" color="inherit" className={this.classes.grow}>
+							<Typography variant="h6" color="inherit" className={this.props.classes.grow}>
 								Recipes</Typography>
 						</Grid>
 						<Grid item>
