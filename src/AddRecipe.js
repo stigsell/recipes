@@ -40,17 +40,6 @@ class AddRecipe extends Component {
 	  	<div className={this.props.classes.root}>
 	      <Grid container spacing={24}>
 	        <Grid item xs={2}>
-	          <Paper className={this.props.classes.paper}>
-	          	<Typography variant="h4" color="inherit">Add Recipe</Typography>
-	          </Paper>
-	        </Grid>
-	        <Grid item xs={10}>
-	          <Paper className={this.props.classes.paper}>
-	          	<Typography variant="h4" color="inherit">|</Typography>
-	          </Paper>
-	        </Grid>
-	        <Grid item xs={2}>
-	          <Paper className={this.props.classes.paper}>xs=2</Paper>
 	        </Grid>
 	        <Grid item xs={8}>
 	          <Paper className={this.props.classes.paper}>
@@ -58,16 +47,6 @@ class AddRecipe extends Component {
 	          </Paper>
 	        </Grid>
 	        <Grid item xs={2}>
-	          <Paper className={this.props.classes.paper}>xs=2</Paper>
-	        </Grid>
-	        <Grid item xs={4}>
-	          <Paper className={this.props.classes.paper}>xs=4</Paper>
-	        </Grid>
-	        <Grid item xs={4}>
-	          <Paper className={this.props.classes.paper}>xs=4</Paper>
-	        </Grid>
-	        <Grid item xs={4}>
-	          <Paper className={this.props.classes.paper}>xs=4</Paper>
 	        </Grid>
 	      </Grid>
 		</div>

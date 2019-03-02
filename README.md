@@ -1,4 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Recipes
+
+## To-Dos
+- Create RecipeCard component and place them on homepage
+- Create ViewRecipe component that loads when you click on a recipe (or go to /recipe/recipe-name)
+- Change theme primary color to green
+- Clean up layout of add-recipe (category dropdown is shifted right, maybe move up upload button)
+- Initialize backend API using AWS Lambda running Node.JS, DynamoDB, and API Gateway
+- Connect React frontend to API
+- Deploy frontend to S3 bucket
+- Create CI/CD pipeline for deploy
+- Set up linter, tests
+- Better processing of numeric ingredient amounts
+- Autocomplete ingredients
+- Mealplan feature: Add meals to "shopping cart", then all ingredients are displayed for all meals
+- PDF printing of recipes
+- Protected admin console to edit/delete recipes
 
 ## Available Scripts
 

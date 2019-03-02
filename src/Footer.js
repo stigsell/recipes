@@ -19,10 +19,9 @@ class Footer extends React.Component {
 		return (
 			<footer className={this.props.classes.footer}>
 		        <Typography variant="h6" align="center" gutterBottom>
-		          Recipes
 		        </Typography>
 		        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-		          Created by Nick Stigsell.
+		          ©2019 Created by Nick Stigsell using <a href="http://reactjs.org">React</a> with <a href="http://material-ui.com">Material-UI</a>.
 		        </Typography>
 		    </footer>
 		)

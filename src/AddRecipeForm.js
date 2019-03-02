@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -16,6 +17,12 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
   },
+  input: {
+    display: 'none',
+  },
+  textField: {
+  	width: 250,
+  },
   paper: {
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
@@ -23,15 +30,34 @@ const styles = theme => ({
   },
 });
 
+const categories = [
+  {
+    value: 'Breakfast'
+  },
+  {
+    value: 'Lunch'
+  },
+  {
+    value: 'Dinner'
+  },
+]
+
 class AddRecipeForm extends Component {
   state = {
   	open: true,
   	name: "",
+  	category: "",
   	ingredients: [],
   	ingredientText: "",
   	steps: [],
   	stepText: "",
   }
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
 
   onChange = (event) => {
     this.setState({ingredientText: event.target.value});
@@ -65,6 +91,18 @@ class AddRecipeForm extends Component {
     return(
 	  	<div className={this.props.classes.root}>
 	      <Grid container spacing={24}>
+  			<Grid container spacing={24}>
+  				<Grid item xs={3}>
+	      			<Typography variant="h4" color="default">Add Recipe</Typography>
+	      		</Grid>
+	      		<Grid item xs={7}>
+	      		</Grid>
+	      		<Grid item xs={2}>
+			        <Button variant="contained" component="span" color="primary" className={this.props.classes.button}>
+			          Submit
+			        </Button>
+			    </Grid>
+			</Grid>
 	      	<List>
 	      		<ListItem>
 	      			<ListItemText primary="Name"></ListItemText>
@@ -78,6 +116,28 @@ class AddRecipeForm extends Component {
 			          variant="outlined"
 			        />
 		        </ListItem>
+		        <TextField
+		          id="outlined-select-currency"
+		          select
+		          label="Category"
+		          className={this.props.classes.textField}
+		          value={this.state.category}
+		          onChange={this.handleChange('category')}
+		          SelectProps={{
+		            MenuProps: {
+		              className: this.props.classes.menu,
+		            },
+		          }}
+		          helperText="Select recipe category"
+		          margin="normal"
+		          variant="outlined"
+		        >
+		          {categories.map(option => (
+		            <MenuItem key={option.value} value={option.value}>
+		              {option.value}
+		            </MenuItem>
+		          ))}
+		        </TextField>
 		        <form onSubmit={(e) => { e.preventDefault(); this.addIngredient(e); } }>
 			        <ListItem>
 		      			<ListItemText primary="Ingredients"></ListItemText>
@@ -118,6 +178,20 @@ class AddRecipeForm extends Component {
 		      		{
       					this.state.steps.map((step, index) => <ListItem key={index}>{step}</ListItem>)
     				}
+    				<ListItem>
+		      		<input
+				        accept="image/*"
+				        className={this.props.classes.input}
+				        id="outlined-button-file"
+				        multiple
+				        type="file"
+				      />
+				      <label htmlFor="outlined-button-file">
+				        <Button variant="outlined" component="span" className={this.props.classes.button}>
+				          Upload Photo
+				        </Button>
+				      </label>
+	      		</ListItem>
 			    </form>
 	      	</List>
 	      </Grid>
