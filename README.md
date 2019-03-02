@@ -2,7 +2,7 @@
 
 ## To-Dos
 - ~~Create RecipeCard component and place them on homepage~~
-- Create ViewRecipe component that loads when you click on a recipe (or go to /recipe/recipe-name)
+- ~~Create ViewRecipe component that loads when you click on a recipe (or go to /recipe/recipe-name)~~
 - Change theme primary color to green
 - Clean up layout of add-recipe (category dropdown is shifted right, maybe move up upload button)
 - Initialize backend API using AWS Lambda running Node.JS, DynamoDB, and API Gateway
