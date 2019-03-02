@@ -40,7 +40,6 @@ class AddRecipeForm extends Component {
   	this.state.ingredients.push(this.state.ingredientText)
   	console.log(this.state.ingredients)
   	this.setState({ingredientText: ""});
-  	// this.state.ingredientText = "";
   }
 
 
@@ -61,7 +60,7 @@ class AddRecipeForm extends Component {
 			          variant="outlined"
 			        />
 		        </ListItem>
-		        <form onSubmit={(e) => { e.preventDefault(); console.log('hello'); this.addIngredient(e); } }>
+		        <form onSubmit={(e) => { e.preventDefault(); this.addIngredient(e); } }>
 			        <ListItem>
 		      			<ListItemText primary="Ingredients"></ListItemText>
 		      			<Button size="large" onClick={this.addIngredient}>+</Button>
@@ -77,6 +76,9 @@ class AddRecipeForm extends Component {
 				          value={this.state.ingredientText}
 				        />
 			        </ListItem>
+			        {
+      					this.state.ingredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)
+    				}
 			    </form>
 	      	</List>
 	      </Grid>
