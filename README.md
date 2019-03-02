@@ -1,7 +1,7 @@
 # Recipes
 
 ## To-Dos
-- Create RecipeCard component and place them on homepage
+- ~~Create RecipeCard component and place them on homepage~~
 - Create ViewRecipe component that loads when you click on a recipe (or go to /recipe/recipe-name)
 - Change theme primary color to green
 - Clean up layout of add-recipe (category dropdown is shifted right, maybe move up upload button)
@@ -15,6 +15,12 @@
 - Mealplan feature: Add meals to "shopping cart", then all ingredients are displayed for all meals
 - PDF printing of recipes
 - Protected admin console to edit/delete recipes
+
+### Small Things
+- Prevent 'not-found' from being a recipe name (used for 404)
+- Make typography inside recipe card not underlined for link
+- Create 'not-found' route that routes to specific page (right now it routes to viewrecipe)
+- Reorganize source folder
 
 ## Available Scripts
 

@@ -9,7 +9,6 @@ import 'typeface-roboto';
 // Components in other files
 import Menu from './Menu'
 import Main from './Main'
-//import Content from './Content'
 import Footer from './Footer'
 
 const styles = theme => ({
