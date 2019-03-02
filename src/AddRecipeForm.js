@@ -29,17 +29,35 @@ class AddRecipeForm extends Component {
   	name: "",
   	ingredients: [],
   	ingredientText: "",
+  	steps: [],
+  	stepText: "",
   }
 
   onChange = (event) => {
     this.setState({ingredientText: event.target.value});
   }
 
+  onChangeStep = (event) => {
+    this.setState({stepText: event.target.value});
+  }
+
   addIngredient = (e) => {
   	e.preventDefault();
-  	this.state.ingredients.push(this.state.ingredientText)
-  	console.log(this.state.ingredients)
-  	this.setState({ingredientText: ""});
+  	if(this.state.ingredientText.length > 0) {
+  		this.state.ingredients.push(this.state.ingredientText)
+  		console.log(this.state.ingredients)
+  		this.setState({ingredientText: ""});
+  	}
+  }
+
+  addStep = (e) => {
+  	e.preventDefault();
+  	if(this.state.stepText.length > 0) {
+
+  		this.state.steps.push(this.state.steps.length + 1 +  ". " + this.state.stepText);  // Add numbers to steps
+  		console.log(this.state.steps)
+  		this.setState({stepText: ""});
+  	}
   }
 
 
@@ -63,7 +81,7 @@ class AddRecipeForm extends Component {
 		        <form onSubmit={(e) => { e.preventDefault(); this.addIngredient(e); } }>
 			        <ListItem>
 		      			<ListItemText primary="Ingredients"></ListItemText>
-		      			<Button size="large" onClick={this.addIngredient}>+</Button>
+		      			
 		      		</ListItem>
 		      		 <ListItem>
 			          <TextField
@@ -75,9 +93,30 @@ class AddRecipeForm extends Component {
 				          onChange={this.onChange}
 				          value={this.state.ingredientText}
 				        />
+				        <Button size="large" disabled={this.state.ingredientText == 0} onClick={this.addIngredient}>+</Button>
 			        </ListItem>
 			        {
       					this.state.ingredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)
+    				}
+    			</form>
+    			<form onSubmit={(e) => { e.preventDefault(); this.addStep(e); } }>
+    				<ListItem>
+		      			<ListItemText primary="Steps"></ListItemText>
+		      		</ListItem>
+		      		<ListItem>
+			          <TextField
+				          id="outlined-dense"
+				          label="Instructions for this step"
+				          className={'step-text-field'}
+				          margin="dense"
+				          variant="outlined"
+				          onChange={this.onChangeStep}
+				          value={this.state.stepText}
+				        />
+				        <Button size="large" disabled={this.state.stepText == 0} onClick={this.addStep}>+</Button>
+			        </ListItem>
+		      		{
+      					this.state.steps.map((step, index) => <ListItem key={index}>{step}</ListItem>)
     				}
 			    </form>
 	      	</List>
