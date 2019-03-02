@@ -25,15 +25,24 @@ const styles = theme => ({
 
 class AddRecipeForm extends Component {
   state = {
+  	open: true,
   	name: "",
   	ingredients: [],
+  	ingredientText: "",
   }
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
+  onChange = (event) => {
+    this.setState({ingredientText: event.target.value});
+  }
+
+  addIngredient = (e) => {
+  	e.preventDefault();
+  	this.state.ingredients.push(this.state.ingredientText)
+  	console.log(this.state.ingredients)
+  	this.setState({ingredientText: ""});
+  	// this.state.ingredientText = "";
+  }
+
 
   render() {
     return(
@@ -52,6 +61,23 @@ class AddRecipeForm extends Component {
 			          variant="outlined"
 			        />
 		        </ListItem>
+		        <form onSubmit={(e) => { e.preventDefault(); console.log('hello'); this.addIngredient(e); } }>
+			        <ListItem>
+		      			<ListItemText primary="Ingredients"></ListItemText>
+		      			<Button size="large" onClick={this.addIngredient}>+</Button>
+		      		</ListItem>
+		      		 <ListItem>
+			          <TextField
+				          id="outlined-dense"
+				          label="Ingredient name"
+				          className={'ingredient-text-field'}
+				          margin="dense"
+				          variant="outlined"
+				          onChange={this.onChange}
+				          value={this.state.ingredientText}
+				        />
+			        </ListItem>
+			    </form>
 	      	</List>
 	      </Grid>
 		</div>
