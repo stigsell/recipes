@@ -7,7 +7,7 @@
 - Clean up layout of add-recipe (category dropdown is shifted right, maybe move up upload button)
 - Initialize backend API using AWS Lambda running Node.JS, DynamoDB, and API Gateway
 - Connect React frontend to API
-- Deploy frontend to S3 bucket
+- ~~Deploy frontend to S3 bucket~~
 - Create CI/CD pipeline for deploy
 - Set up linter, tests
 - Better processing of numeric ingredient amounts
