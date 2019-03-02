@@ -9,35 +9,24 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
+// Import components from other files
+import AddRecipeForm from './AddRecipeForm';
+
 const styles = theme => ({
-	root: {
-	    ...theme.mixins.gutters(),
-	    paddingTop: theme.spacing.unit * 2,
-	    paddingBottom: theme.spacing.unit * 2,
-  	},
-  	container: {
-    	display: 'flex',
-    	flexWrap: 'wrap',
-  	},
-  	textField: {
-    	marginLeft: theme.spacing.unit,
-    	marginRight: theme.spacing.unit,
-  	},
-	layout: {
-		width: 'auto',
-		marginLeft: theme.spacing.unit * 3,
-		marginRight: theme.spacing.unit * 3,
-		[theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-			width: 1100,
-			marginLeft: 'auto',
-			marginRight: 'auto',
-		},
-	},
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
 });
 
 class AddRecipe extends Component {
   state = {
   	name: "",
+  	ingredients: [],
   }
 
   handleChange = name => event => {
@@ -48,29 +37,40 @@ class AddRecipe extends Component {
 
   render() {
     return(
-          // <div className={this.props.classes.layout}>
-          <div>
-          	<Paper className={this.props.classes.root} elevation={1}>
-            	<Grid container spacing={16}>
-            		<Grid item xs={12}>
-	              		<Typography component="h1" variant="h2">Add Recipe</Typography>
-
-	              		<form className={this.props.classes.container} noValidate autoComplete="off">
-	              			<TextField
-					        	id="standard-with-placeholder"
-					        	label="Name"
-					        	className={this.props.classes.textField}
-					        	value={this.state.name}
-					        	onChange={this.handleChange('name')}
-					        	margin="normal"
-					        	variant="outlined"
-					        />
-              			</form>
-              		</Grid>
-            	</Grid>
-            </Paper>
-          </div>
-          // </div>
+	  	<div className={this.props.classes.root}>
+	      <Grid container spacing={24}>
+	        <Grid item xs={2}>
+	          <Paper className={this.props.classes.paper}>
+	          	<Typography variant="h4" color="inherit">Add Recipe</Typography>
+	          </Paper>
+	        </Grid>
+	        <Grid item xs={10}>
+	          <Paper className={this.props.classes.paper}>
+	          	<Typography variant="h4" color="inherit">|</Typography>
+	          </Paper>
+	        </Grid>
+	        <Grid item xs={2}>
+	          <Paper className={this.props.classes.paper}>xs=2</Paper>
+	        </Grid>
+	        <Grid item xs={8}>
+	          <Paper className={this.props.classes.paper}>
+	          	<AddRecipeForm />
+	          </Paper>
+	        </Grid>
+	        <Grid item xs={2}>
+	          <Paper className={this.props.classes.paper}>xs=2</Paper>
+	        </Grid>
+	        <Grid item xs={4}>
+	          <Paper className={this.props.classes.paper}>xs=4</Paper>
+	        </Grid>
+	        <Grid item xs={4}>
+	          <Paper className={this.props.classes.paper}>xs=4</Paper>
+	        </Grid>
+	        <Grid item xs={4}>
+	          <Paper className={this.props.classes.paper}>xs=4</Paper>
+	        </Grid>
+	      </Grid>
+		</div>
     	);
   }
 }
