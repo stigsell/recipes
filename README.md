@@ -4,11 +4,11 @@
 - ~~Create RecipeCard component and place them on homepage~~
 - ~~Create ViewRecipe component that loads when you click on a recipe (or go to /recipe/recipe-name)~~
 - Change theme primary color to green
-- Clean up layout of add-recipe (category dropdown is shifted right, maybe move up upload button)
-- Initialize backend API using AWS Lambda running Node.JS, DynamoDB, and API Gateway
+- ~~Clean up layout of add-recipe (category dropdown is shifted right, maybe move up upload button)~~
+- ~~Initialize backend API using AWS Lambda running Node.JS, DynamoDB, and API Gateway~~
 - Connect React frontend to API
 - ~~Deploy frontend to S3 bucket~~
-- Create CI/CD pipeline for deploy
+- ~~Create CI/CD pipeline for deploy~~
 - Set up linter, tests
 - Better processing of numeric ingredient amounts
 - Autocomplete ingredients
@@ -22,7 +22,38 @@
 - Create 'not-found' route that routes to specific page (right now it routes to viewrecipe)
 - Reorganize source folder
 
-## Available Scripts
+## Scripts to Run
+
+### Frontend
+
+### yarn start
+
+Must be inside /api.  Starts local server for frontend on localhost:3000
+
+### yarn build
+
+Must be inside /api.  Builds frontend for production.
+
+### yarn deploy
+
+Must be inside /api.  Deploys frontend to AWS using S3.
+
+
+### Backend
+
+### sls deploy
+
+Must be inside /api.  Deploys backend to AWS using CloudFormation.
+
+### sls offline start
+
+Must be inside /api.  Starts offline server for backend on localhost:3000.
+
+### sls dynamodb install
+
+Must be inside /api.  Sets up DynamoDB table for offline. Should only need to run once.
+
+## Other Scripts
 
 In the project directory, you can run:
 
@@ -59,32 +90,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
