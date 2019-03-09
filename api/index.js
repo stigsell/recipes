@@ -54,8 +54,8 @@ app.get('/recipes/:recipeShortName', function (req, res) {
 			res.status(400).json({ error: 'Could not get recipe' });
 		}
 		if (result.Item) {
-			const {recipeShortName, name} = result.Item;
-			res.json({ recipeShortName, name });
+			const {recipeShortName, name, category, ingredients, steps } = result.Item;
+			res.json({ recipeShortName, name, category, ingredients, steps });
 		} else {
 			res.status(404).json({ error: 'Recipe not found' });
 		}
@@ -68,9 +68,14 @@ app.post('/recipes', function (req, res) {
 	console.log(req);
 	const name = req.query.name;
 	const recipeShortName = slugify(name); // Make recipeShortName URL-friendly
-	console.log(req.body);
+	const category = req.query.category;
+	const ingredients = req.query.ingredients;
+	const steps = req.query.steps;
 	console.log(recipeShortName);
 	console.log(name);
+	console.log(category);
+	console.log(ingredients);
+	console.log(steps);
 	if (typeof recipeShortName !== 'string') {
 		res.status(400).json({ error: '"recipeShortName" must be a string' });
 	} else if (typeof name !== 'string') {
@@ -82,6 +87,9 @@ app.post('/recipes', function (req, res) {
 		Item: {
 			recipeShortName: recipeShortName,
 			name: name,
+			category: category,
+			ingredients: ingredients,
+			steps: steps,
 		},
 	};
 
@@ -90,7 +98,7 @@ app.post('/recipes', function (req, res) {
 			console.log(error)
 			res.status(400).json({ error: 'Could not add recipe' })
 		}
-		res.json({ recipeShortName, name })
+		res.json({ recipeShortName, name, category, ingredients, steps })
 	})
 
 })
