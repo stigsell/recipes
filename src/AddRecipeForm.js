@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
@@ -153,7 +150,7 @@ class AddRecipeForm extends Component {
 				          onChange={this.onChange}
 				          value={this.state.ingredientText}
 				        />
-				        <Button size="large" disabled={this.state.ingredientText == 0} onClick={this.addIngredient}>+</Button>
+				        <Button size="large" disabled={this.state.ingredientText === 0} onClick={this.addIngredient}>+</Button>
 			        </ListItem>
 			        {
       					this.state.ingredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)
@@ -173,7 +170,7 @@ class AddRecipeForm extends Component {
 				          onChange={this.onChangeStep}
 				          value={this.state.stepText}
 				        />
-				        <Button size="large" disabled={this.state.stepText == 0} onClick={this.addStep}>+</Button>
+				        <Button size="large" disabled={this.state.stepText === 0} onClick={this.addStep}>+</Button>
 			        </ListItem>
 		      		{
       					this.state.steps.map((step, index) => <ListItem key={index}>{step}</ListItem>)
