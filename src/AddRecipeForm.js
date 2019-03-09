@@ -25,6 +25,9 @@ const styles = theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  addRecipeDropdown: {
+  	width: 250,
+  }
 });
 
 const categories = [
@@ -102,39 +105,41 @@ class AddRecipeForm extends Component {
 			</Grid>
 	      	<List>
 	      		<ListItem>
-	      			<ListItemText primary="Name"></ListItemText>
+	      			<ListItemText primary="Recipe Info"></ListItemText>
 	      		</ListItem>
 	      		<ListItem>
 	      			<TextField
 			          id="outlined-dense"
 			          label="Recipe name"
-			          className={'name-text-field'}
+			          className={'add-recipe-text-field'}
 			          margin="dense"
 			          variant="outlined"
 			        />
 		        </ListItem>
-		        <TextField
-		          id="outlined-select-currency"
-		          select
-		          label="Category"
-		          className={this.props.classes.textField}
-		          value={this.state.category}
-		          onChange={this.handleChange('category')}
-		          SelectProps={{
-		            MenuProps: {
-		              className: this.props.classes.menu,
-		            },
-		          }}
-		          helperText="Select recipe category"
-		          margin="normal"
-		          variant="outlined"
-		        >
-		          {categories.map(option => (
-		            <MenuItem key={option.value} value={option.value}>
-		              {option.value}
-		            </MenuItem>
-		          ))}
-		        </TextField>
+		        <ListItem>
+			        <TextField
+			          id="outlined-select-category"
+			          select
+			          label="Category"
+			          className={'addRecipeDropdown'}
+			          value={this.state.category}
+			          onChange={this.handleChange('category')}
+			          SelectProps={{
+			            MenuProps: {
+			              className: this.props.classes.menu,
+			            },
+			          }}
+			          helperText="Select recipe category"
+			          margin="normal"
+			          variant="outlined"
+			        >
+			          {categories.map(option => (
+			            <MenuItem key={option.value} value={option.value}>
+			              {option.value}
+			            </MenuItem>
+			          ))}
+			        </TextField>
+		        </ListItem>
 		        <form onSubmit={(e) => { e.preventDefault(); this.addIngredient(e); } }>
 			        <ListItem>
 		      			<ListItemText primary="Ingredients"></ListItemText>
@@ -144,7 +149,7 @@ class AddRecipeForm extends Component {
 			          <TextField
 				          id="outlined-dense"
 				          label="Ingredient name"
-				          className={'ingredient-text-field'}
+				          className={'add-recipe-text-field'}
 				          margin="dense"
 				          variant="outlined"
 				          onChange={this.onChange}
@@ -164,7 +169,7 @@ class AddRecipeForm extends Component {
 			          <TextField
 				          id="outlined-dense"
 				          label="Instructions for this step"
-				          className={'step-text-field'}
+				          className={'add-recipe-text-field'}
 				          margin="dense"
 				          variant="outlined"
 				          onChange={this.onChangeStep}
