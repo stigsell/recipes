@@ -24,6 +24,21 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
+// Source: https://medium.com/@mhagemann/the-ultimate-way-to-slugify-a-url-string-in-javascript-b8e4a0d849e1
+function slugify(string) {
+  const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœṕŕßśșțùúüûǘẃẍÿź·/_,:;'
+  const b = 'aaaaaaaaceeeeghiiiimnnnoooooprssstuuuuuwxyz------'
+  const p = new RegExp(a.split('').join('|'), 'g')
+  return string.toString().toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+    .replace(/&/g, '-and-') // Replace & with ‘and’
+    .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, '') // Trim - from end of text
+}
+
 //Get Recipe Endpoint
 app.get('/recipes/:recipeShortName', function (req, res) {
 	const params = {
@@ -51,8 +66,8 @@ app.get('/recipes/:recipeShortName', function (req, res) {
 app.post('/recipes', function (req, res) {
 	// const { recipeShortName, name } = req.body;
 	console.log(req);
-	const recipeShortName = req.query.recipeShortName;
 	const name = req.query.name;
+	const recipeShortName = slugify(name); // Make recipeShortName URL-friendly
 	console.log(req.body);
 	console.log(recipeShortName);
 	console.log(name);
