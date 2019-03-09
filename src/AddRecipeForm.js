@@ -92,12 +92,12 @@ class AddRecipeForm extends Component {
 	  	<div className={this.props.classes.root}>
 	      <Grid container spacing={24}>
   			<Grid container spacing={24}>
-  				<Grid item xs={3}>
+  				<Grid item sm={10} md={3}>
 	      			<Typography variant="h4" color="default">Add Recipe</Typography>
 	      		</Grid>
-	      		<Grid item xs={7}>
+	      		<Grid item md={7}>
 	      		</Grid>
-	      		<Grid item xs={2}>
+	      		<Grid item sm={2} md={2}>
 			        <Button variant="contained" component="span" color="primary" className={this.props.classes.button}>
 			          Submit
 			        </Button>

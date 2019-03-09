@@ -34,14 +34,14 @@ class AddRecipe extends Component {
     return(
 	  	<div className={this.props.classes.root}>
 	      <Grid container spacing={24}>
-	        <Grid item xs={2}>
+	        <Grid item md={2}>
 	        </Grid>
-	        <Grid item xs={8}>
+	        <Grid item sm={12} md={8}>
 	          <Paper className={this.props.classes.paper}>
 	          	<AddRecipeForm />
 	          </Paper>
 	        </Grid>
-	        <Grid item xs={2}>
+	        <Grid item md={2}>
 	        </Grid>
 	      </Grid>
 		</div>
