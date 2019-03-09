@@ -58,11 +58,11 @@ class Home extends React.Component {
           </div>
           <div className={classNames(this.props.classes.layout, this.props.classes.cardGrid)}>
             {/* End hero unit */}
-            <Grid container spacing={24}>
+            <Grid container spacing={40}>
               {cards.map(card => (
-                <Grid item xs={12}>
+                // <Grid item xs={12} sm={6} md={4} lg={3}>
                   <RecipeCard card={card} name={'hello'} />
-                </Grid>
+                // </Grid>
               ))}
             </Grid>
           </div>
