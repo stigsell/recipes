@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const styles = theme => ({
   root: {
@@ -57,9 +58,18 @@ class AddRecipeForm extends Component {
     this.setState({
       [name]: event.target.value,
     });
+
   };
 
-  onChange = (event) => {
+  onChangeName = (event) => {
+    this.setState({name: event.target.value});
+  }
+
+  onChangeCategory = (event) => {
+    this.setState({category: event.target.value});
+  }
+
+  onChangeIngredient = (event) => {
     this.setState({ingredientText: event.target.value});
   }
 
@@ -74,6 +84,7 @@ class AddRecipeForm extends Component {
   		console.log(this.state.ingredients)
   		this.setState({ingredientText: ""});
   	}
+  	console.log(this.state)
   }
 
   addStep = (e) => {
@@ -84,6 +95,28 @@ class AddRecipeForm extends Component {
   		console.log(this.state.steps)
   		this.setState({stepText: ""});
   	}
+  	console.log(this.state)
+  }
+
+  sendRecipeData = () => {
+  	// event.preventDefault();
+  	console.log('hello')
+  	console.log(this.state)
+  	console.log(this)
+
+  	const body = {
+      recipeShortName: this.state.name,
+      name: this.state.name,
+      category: this.state.category,
+      ingredients: JSON.stringify(this.state.ingredients),
+      steps: JSON.stringify(this.state.steps),
+    };
+    console.log(body);
+    axios.post('http://localhost:3000/recipes', { body })
+    .then(res => {
+    	console.log(res);
+        console.log(res.data);
+    })
   }
 
 
@@ -98,7 +131,7 @@ class AddRecipeForm extends Component {
 	      		<Grid item md={7}>
 	      		</Grid>
 	      		<Grid item sm={2} md={2}>
-			        <Button variant="contained" component="span" color="primary" className={this.props.classes.button}>
+			        <Button variant="contained" component="span" color="primary" className={this.props.classes.button} onClick={this.sendRecipeData}>
 			          Submit
 			        </Button>
 			    </Grid>
@@ -112,6 +145,7 @@ class AddRecipeForm extends Component {
 			          id="outlined-dense"
 			          label="Recipe name"
 			          className={'add-recipe-text-field'}
+			          onChange={this.handleChange('name')}
 			          margin="dense"
 			          variant="outlined"
 			        />
@@ -152,7 +186,7 @@ class AddRecipeForm extends Component {
 				          className={'add-recipe-text-field'}
 				          margin="dense"
 				          variant="outlined"
-				          onChange={this.onChange}
+				          onChange={this.onChangeIngredient}
 				          value={this.state.ingredientText}
 				        />
 				        <Button size="large" disabled={this.state.ingredientText === 0} onClick={this.addIngredient}>+</Button>

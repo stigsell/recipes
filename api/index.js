@@ -65,12 +65,13 @@ app.get('/recipes/:recipeShortName', function (req, res) {
 //Add Recipe Endpoint
 app.post('/recipes', function (req, res) {
 	// const { recipeShortName, name } = req.body;
+	const requestbody = req.body.body;
 	console.log(req);
-	const name = req.query.name;
+	const name = requestbody.name;
 	const recipeShortName = slugify(name); // Make recipeShortName URL-friendly
-	const category = req.query.category;
-	const ingredients = req.query.ingredients;
-	const steps = req.query.steps;
+	const category = requestbody.category;
+	const ingredients = requestbody.ingredients;
+	const steps = requestbody.steps;
 	console.log(recipeShortName);
 	console.log(name);
 	console.log(category);
