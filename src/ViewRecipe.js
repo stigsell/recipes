@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 // Import components from other files
 
@@ -27,6 +28,7 @@ class AddRecipe extends Component {
   	name: "",
   	ingredients: ["2 avocados", "onion", "cilantro",],
     steps: ["1. Mash avocados", "2. Cut onions", "3. Mix and enjoy!"],
+    apiData: "",
   }
 
   handleChange = name => event => {
@@ -34,6 +36,30 @@ class AddRecipe extends Component {
       [name]: event.target.value,
     });
   };
+
+  componentDidMount() {
+    console.log('router route')
+    console.log(this.props.location)
+    const path = this.props.location.pathname;
+    let recipePath = path.substring(0,7) + 's/' + path.substring(8)
+    console.log(recipePath)
+    axios.get('http://localhost:3000' + recipePath)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        this.setState({ name: res.data.name });
+        this.setState({ category: res.data.category });
+        console.log(res.data.ingredients)
+        console.log(JSON.parse(res.data.ingredients))
+        if (typeof res.data.ingredients !== 'undefined') {
+          this.setState({ ingredients: JSON.parse(res.data.ingredients)});
+        }
+        if (typeof res.data.steps !== 'undefined') {
+          this.setState({ steps: JSON.parse(res.data.steps)});
+        }
+        
+      })
+  }
 
   render() {
     return(
@@ -45,7 +71,7 @@ class AddRecipe extends Component {
 	          <Paper className={this.props.classes.paper}>
     	        <Grid container spacing={24}>
                 <Grid item ={4}>
-                    <Typography variant="h4" color="default">Recipe Name</Typography>
+                    <Typography variant="h4" color="default">{this.state.name}</Typography>
                     <Image src="https://www.culinaryhill.com/wp-content/uploads/2015/01/Chipotle-Guacamole-9-660x989.jpg" />
                   </Grid>
                   <Grid item xs={8}>
