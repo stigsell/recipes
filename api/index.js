@@ -39,6 +39,27 @@ function slugify(string) {
     .replace(/-+$/, '') // Trim - from end of text
 }
 
+//Get All Recipe Endpoint
+app.get('/allRecipes/', function (req, res) {
+	const params = {
+		TableName: RECIPES_TABLE,
+	}
+
+	dynamoDb.scan(params, (error, result) => {
+		if (error) {
+			console.log(error);
+			res.status(400).json({ error: 'Could not get all recipes' });
+		}
+		if (result) {
+			// const {recipeShortName, name, category, ingredients, steps } = result;
+			// res.json({ recipeShortName, name, category, ingredients, steps });
+			res.json({ result })
+		} else {
+			res.status(404).json({ error: 'General error' });
+		}
+	});
+})
+
 //Get Recipe Endpoint
 app.get('/recipes/:recipeShortName', function (req, res) {
 	const params = {

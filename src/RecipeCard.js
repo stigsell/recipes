@@ -26,10 +26,12 @@ const styles = theme => ({
 class RecipeCard extends React.Component {
 	constructor(props) {
 		super(props);
+    console.log('props!')
+    console.log(props)
 		this.classes = styles;
 		this.card = props.card;
 		this.name = props.name;
-		this.slug = props.slug;
+		this.slug = props.recipeShortName;
 		if(!this.slug) {
 			this.slug = 'not-found';
 		}

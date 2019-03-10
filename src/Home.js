@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+
 
 // Import other components
 import RecipeCard from './RecipeCard'
@@ -34,12 +36,26 @@ const styles = theme => ({
   },
 });
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+// const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.classes = styles;
+  }
+
+  state = {
+    cards: [],
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3000/allRecipes')
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        this.setState({ cards: res.data.result.Items });
+        console.log(this.state.cards)
+      })
   }
   render() {
     return (
@@ -59,9 +75,9 @@ class Home extends React.Component {
           <div className={classNames(this.props.classes.layout, this.props.classes.cardGrid)}>
             {/* End hero unit */}
             <Grid container spacing={40}>
-              {cards.map(card => (
+              {this.state.cards.map(card => (
                 // <Grid item xs={12} sm={6} md={4} lg={3}>
-                  <RecipeCard card={card} name={'hello'} />
+                  <RecipeCard card={card} name={card.name} recipeShortName={card.recipeShortName} />
                 // </Grid>
               ))}
             </Grid>
