@@ -40,12 +40,25 @@ functions:
   getRecipe:
     handler: index.handler
     events:
-      - http: 'GET /recipes/{proxy+}'
+      - http: 
+         path: recipes/{name}
+         method: get
+         cors: true
+  allRecipes:
+    handler: index.handler
+    events:
+      - http:
+         path: allrecipes
+         method: get
+         cors: true
 
   addRecipe:
     handler: index.handler
     events:
-      - http: 'POST /recipes'
+      - http:
+         path: recipes
+         method: post
+         cors: true
 
 resources:
     Resources:

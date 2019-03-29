@@ -26,8 +26,8 @@ const styles = theme => ({
 class AddRecipe extends Component {
   state = {
   	name: "",
-  	ingredients: ["2 avocados", "onion", "cilantro",],
-    steps: ["1. Mash avocados", "2. Cut onions", "3. Mix and enjoy!"],
+  	ingredients: [],
+    steps: [],
     apiData: "",
   }
 
@@ -43,7 +43,7 @@ class AddRecipe extends Component {
     const path = this.props.location.pathname;
     let recipePath = path.substring(0,7) + 's/' + path.substring(8)
     console.log(recipePath)
-    axios.get('http://localhost:3000' + recipePath)
+    axios.get('https://lf2ekvkoh6.execute-api.us-east-1.amazonaws.com/dev' + recipePath)  // http://localhost:3000
       .then(res => {
         console.log(res);
         console.log(res.data);

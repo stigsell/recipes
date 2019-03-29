@@ -112,7 +112,7 @@ class AddRecipeForm extends Component {
       steps: JSON.stringify(this.state.steps),
     };
     console.log(body);
-    axios.post('http://localhost:3000/recipes', { body })
+    axios.post('https://lf2ekvkoh6.execute-api.us-east-1.amazonaws.com/dev/recipes', { body })  // http://localhost:3000/recipes
     .then(res => {
     	console.log(res);
         console.log(res.data);

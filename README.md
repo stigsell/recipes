@@ -28,15 +28,15 @@
 
 ### yarn start
 
-Must be inside /api.  Starts local server for frontend on localhost:3000
+Must be inside /.  Starts local server for frontend on localhost:3000
 
 ### yarn build
 
-Must be inside /api.  Builds frontend for production.
+Must be inside /.  Builds frontend for production.
 
 ### yarn deploy
 
-Must be inside /api.  Deploys frontend to AWS using S3.
+Must be inside /.  Deploys frontend to AWS using S3.
 
 
 ### Backend

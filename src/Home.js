@@ -49,7 +49,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/allRecipes')
+    axios.get('https://lf2ekvkoh6.execute-api.us-east-1.amazonaws.com/dev/allRecipes')  //http://localhost:3000/allRecipes
       .then(res => {
         console.log(res);
         console.log(res.data);

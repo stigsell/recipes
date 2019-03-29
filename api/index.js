@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const express = require('express')
 const app = express()
 const AWS = require('aws-sdk');
+const cors = require('cors')
 
 const RECIPES_TABLE = process.env.RECIPES_TABLE;
 
@@ -18,6 +19,7 @@ if (IS_OFFLINE === 'true') {
 	dynamoDb = new AWS.DynamoDB.DocumentClient();
 }
 
+app.use(cors())
 app.use(bodyParser.json({ strict: false }));
 
 app.get('/', function (req, res) {
@@ -124,5 +126,6 @@ app.post('/recipes', function (req, res) {
 	})
 
 })
+
 
 module.exports.handler = serverless(app);
