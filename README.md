@@ -9,6 +9,8 @@
 - ~~Connect React frontend to API~~
 - ~~Deploy frontend to S3 bucket~~
 - ~~Create CI/CD pipeline for deploy~~
+- Implement photo upload and display logic
+- Change theme primary color to green
 - Set up linter, tests
 - Better processing of numeric ingredient amounts
 - Autocomplete ingredients
