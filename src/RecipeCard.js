@@ -40,7 +40,7 @@ class RecipeCard extends React.Component {
 	render() {
 		return (
 			<Grid item key={this.card} xs={12} sm={6} md={4} lg={3}>
-				<Link to={this.url}>
+				<Link to={this.url} style={{ textDecoration: 'none' }}>
                   <Card className={this.props.classes.card}>
                     <CardMedia
                       className={this.props.classes.cardMedia}

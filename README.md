@@ -19,14 +19,14 @@
 
 ### Small Things
 - Prevent 'not-found' from being a recipe name (used for 404)
-- Make typography inside recipe card not underlined for link
+- ~~Make typography inside recipe card not underlined for link~~
 - Create 'not-found' route that routes to specific page (right now it routes to viewrecipe)
 - Reorganize source folder
 - Clean up console logs
 
 ## Scripts to Run
 
-### Frontend
+## Frontend
 
 ### yarn start
 
@@ -41,7 +41,7 @@ Must be inside /.  Builds frontend for production.
 Must be inside /.  Deploys frontend to AWS using S3.
 
 
-### Backend
+## Backend
 
 ### sls deploy
 
