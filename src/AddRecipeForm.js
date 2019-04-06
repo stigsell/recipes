@@ -131,7 +131,7 @@ class AddRecipeForm extends Component {
 	      		<Grid item md={7}>
 	      		</Grid>
 	      		<Grid item sm={2} md={2}>
-			        <Button variant="contained" component="span" color="primary" className={this.props.classes.button} onClick={this.sendRecipeData}>
+			        <Button variant="contained" component="span" color="secondary" className={this.props.classes.button} onClick={this.sendRecipeData}>
 			          Submit
 			        </Button>
 			    </Grid>
