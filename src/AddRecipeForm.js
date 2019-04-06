@@ -28,7 +28,7 @@ const styles = theme => ({
   },
   addRecipeDropdown: {
   	width: 250,
-  }
+  },
 });
 
 const categories = [
@@ -136,6 +136,7 @@ class AddRecipeForm extends Component {
 			        </Button>
 			    </Grid>
 			</Grid>
+			<Grid item sm={10}>
 	      	<List>
 	      		<ListItem>
 	      			<ListItemText primary="Recipe Info"></ListItemText>
@@ -230,6 +231,7 @@ class AddRecipeForm extends Component {
 	      		</ListItem>
 			    </form>
 	      	</List>
+	      	</Grid>
 	      </Grid>
 		</div>
     	);

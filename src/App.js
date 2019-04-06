@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import 'typeface-roboto';
 
 
+
 // Components in other files
 import Menu from './Menu'
 import Main from './Main'
@@ -16,21 +17,21 @@ const styles = theme => ({
 
 
 
-function Album(props) {
+function Recipes(props) {
   // const { classes } = props;
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <Menu />
-      <Main />
-      <Footer />
+        <CssBaseline />
+        <Menu />
+        <Main />
+        <Footer />
     </React.Fragment>
   );
 }
 
-Album.propTypes = {
+Recipes.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Album);
+export default withStyles(styles)(Recipes);

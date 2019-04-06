@@ -60,25 +60,10 @@ class Home extends React.Component {
   render() {
     return (
         <main>
-          {/* Hero unit */}
-          <div className={this.props.classes.heroUnit}>
-            <div className={this.props.classes.heroContent}>
-              <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                Recipes
-              </Typography>
-              <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                These are some of my favorite recipes. Enjoy!
-              </Typography>
-              
-            </div>
-          </div>
           <div className={classNames(this.props.classes.layout, this.props.classes.cardGrid)}>
-            {/* End hero unit */}
             <Grid container spacing={40}>
               {this.state.cards.map(card => (
-                // <Grid item xs={12} sm={6} md={4} lg={3}>
                   <RecipeCard card={card} name={card.name} recipeShortName={card.recipeShortName} />
-                // </Grid>
               ))}
             </Grid>
           </div>

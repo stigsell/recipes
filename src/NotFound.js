@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 // Import components from other files
@@ -37,7 +38,7 @@ class NotFound extends Component {
 	        </Grid>
 	        <Grid item xs={8}>
 	          <Paper className={this.props.classes.paper}>
-	          	Recipe Not Found
+              <Typography variant="h4" color="default">Recipe Not Found</Typography>
 	          </Paper>
 	        </Grid>
 	        <Grid item xs={2}>

@@ -67,14 +67,14 @@ class AddRecipe extends Component {
 	      <Grid container spacing={24}>
 	        <Grid item md={2}>
 	        </Grid>
-	        <Grid item sm={8} md={8}>
+	        <Grid item sm={12} md={8}>
 	          <Paper className={this.props.classes.paper}>
     	        <Grid container spacing={24}>
-                <Grid item ={4}>
+                <Grid item md={4}>
                     <Typography variant="h4" color="default">{this.state.name}</Typography>
                     <Image src="https://www.culinaryhill.com/wp-content/uploads/2015/01/Chipotle-Guacamole-9-660x989.jpg" />
                   </Grid>
-                  <Grid item xs={8}>
+                  <Grid item xs={12} md={8}>
                     <List>
                       <ListItem>
                         <ListItemText primary="Ingredients"></ListItemText>
