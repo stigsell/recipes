@@ -3,7 +3,7 @@
 ## To-Dos
 - ~~Create RecipeCard component and place them on homepage~~
 - ~~Create ViewRecipe component that loads when you click on a recipe (or go to /recipe/recipe-name)~~
-- Change theme primary color to green
+- ~~Change theme primary color to green~~
 - ~~Clean up layout of add-recipe (category dropdown is shifted right, maybe move up upload button)~~
 - ~~Initialize backend API using AWS Lambda running Node.JS, DynamoDB, and API Gateway~~
 - ~~Connect React frontend to API~~
@@ -95,3 +95,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/
 https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html
+https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serving-outdated-content-s3/

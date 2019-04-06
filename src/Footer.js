@@ -21,7 +21,7 @@ class Footer extends React.Component {
 		        <Typography variant="h6" align="center" gutterBottom>
 		        </Typography>
 		        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-		          ©2019 Created by Nick Stigsell using <a href="http://reactjs.org">React</a> with <a href="http://material-ui.com">Material-UI</a>.
+		          ©2019 Created by <a href="http://github.com/stigsell">Nick Stigsell</a> using <a href="http://reactjs.org">React</a> with <a href="http://material-ui.com">Material-UI</a>.
 		        </Typography>
 		    </footer>
 		)
