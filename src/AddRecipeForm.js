@@ -27,7 +27,7 @@ const styles = theme => ({
     color: theme.palette.text.secondary,
   },
   addRecipeDropdown: {
-  	width: 250,
+  	width: 350,
   },
 });
 
@@ -143,17 +143,17 @@ class AddRecipeForm extends Component {
 	      		</ListItem>
 	      		<ListItem>
 	      			<TextField
-			          id="outlined-dense"
+			          id="standard-dense"
 			          label="Recipe name"
 			          className={'add-recipe-text-field'}
 			          onChange={this.handleChange('name')}
+			          fullWidth
 			          margin="dense"
-			          variant="outlined"
 			        />
 		        </ListItem>
 		        <ListItem>
 			        <TextField
-			          id="outlined-select-category"
+			          id="standard-select-category"
 			          select
 			          label="Category"
 			          className={'addRecipeDropdown'}
@@ -166,7 +166,6 @@ class AddRecipeForm extends Component {
 			          }}
 			          helperText="Select recipe category"
 			          margin="normal"
-			          variant="outlined"
 			        >
 			          {categories.map(option => (
 			            <MenuItem key={option.value} value={option.value}>
@@ -182,11 +181,11 @@ class AddRecipeForm extends Component {
 		      		</ListItem>
 		      		 <ListItem>
 			          <TextField
-				          id="outlined-dense"
+				          id="standard-dense"
 				          label="Ingredient name"
 				          className={'add-recipe-text-field'}
 				          margin="dense"
-				          variant="outlined"
+				          fullWidth
 				          onChange={this.onChangeIngredient}
 				          value={this.state.ingredientText}
 				        />
@@ -202,11 +201,11 @@ class AddRecipeForm extends Component {
 		      		</ListItem>
 		      		<ListItem>
 			          <TextField
-				          id="outlined-dense"
+				          id="standard-multiline-flexible"
 				          label="Instructions for this step"
 				          className={'add-recipe-text-field'}
 				          margin="dense"
-				          variant="outlined"
+				          fullWidth
 				          onChange={this.onChangeStep}
 				          value={this.state.stepText}
 				        />
