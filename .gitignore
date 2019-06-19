@@ -11,6 +11,13 @@
 # production
 /build
 
+# unneeded
+.serverless/
+api/.dynamodb/
+api/.env
+api/.serverless/
+api/node_modules/
+
 # misc
 .DS_Store
 .env.local
