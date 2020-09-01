@@ -6,15 +6,19 @@ plugins:
   - serverless-dynamodb-local
   - serverless-offline
 
+
 custom:
   tableName: 'recipes-table-${self:provider.stage}'
+  bucketName: 'recipes-photos-${self:provider.stage}'
   dynamodb:
     start:
       migrate: true
+    stages:
+      - dev
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   stage: dev
   region: us-east-1
   iamRoleStatements:
@@ -30,6 +34,7 @@ provider:
         - { "Fn::GetAtt": ["RecipesDynamoDBTable", "Arn"] }
   environment:
     RECIPES_TABLE: ${self:custom.tableName}
+    S3_BUCKET: ${self:custom.bucketName}
 
 functions:
   app:
@@ -51,13 +56,26 @@ functions:
          path: allrecipes
          method: get
          cors: true
-
   addRecipe:
     handler: index.handler
     events:
       - http:
          path: recipes
          method: post
+         cors: true
+  uploadPhoto:
+    handler: index.handler
+    events:
+      - http:
+         path: uploadphoto
+         method: post
+         cors: true
+  getPhoto:
+    handler: index.handler
+    events:
+      - http:
+         path: photo/{name}
+         method: get
          cors: true
 
 resources:
@@ -75,3 +93,30 @@ resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
+      PhotoBucket:
+        Type: AWS::S3::Bucket
+        Properties:
+          BucketName: ${self:custom.bucketName}
+          # Set the CORS policy
+          CorsConfiguration:
+            CorsRules:
+              -
+                AllowedOrigins:
+                  - '*'
+                AllowedHeaders:
+                  - '*'
+                AllowedMethods:
+                  - GET
+                  - PUT
+                  - POST
+                  - DELETE
+                  - HEAD
+                MaxAge: 3000
+# Print out the name of the bucket that is created
+Outputs:
+  AttachmentsBucketName:
+    Value:
+      Ref: PhotoBucket
+  WebAppCloudFrontDistributionOutput:
+      Value:
+        'Fn::GetAtt': [ WebAppCloudFrontDistribution, DomainName ]

@@ -1,30 +1,44 @@
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const AWS = require('aws-sdk');
-const cors = require('cors')
+const cors = require('cors');
+var fs = require('fs')
 
 const RECIPES_TABLE = process.env.RECIPES_TABLE;
+const S3_BUCKET = process.env.S3_BUCKET;
 
 const IS_OFFLINE = process.env.IS_OFFLINE;
 let dynamoDb;
 if (IS_OFFLINE === 'true') {
+	console.log('offline')
 	dynamoDb = new AWS.DynamoDB.DocumentClient({
 		region: 'localhost',
 		endpoint: 'http://localhost:8000'
 	})
+	console.log('created offline DocumentClient')
 	console.log(dynamoDb);
 } else {
 	dynamoDb = new AWS.DynamoDB.DocumentClient();
 }
 
-app.use(cors())
+s3 = new AWS.S3({apiVersion: '2006-03-01'});
+
+// app.use(cors())
 app.use(bodyParser.json({ strict: false }));
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+var whitelist = ['https://recipes.stig.co', 'https://stig.co', 'https://d17jshnvscie1x.cloudfront.net', 'http://recipes.stig.co.s3-website-us-east-1.amazonaws.com', 'http://localhost:3001', 'http://localhost:3000']
+var corsOptions = {
+  origin: function (origin, callback) {
+  	console.log(origin)
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 // Source: https://medium.com/@mhagemann/the-ultimate-way-to-slugify-a-url-string-in-javascript-b8e4a0d849e1
 function slugify(string) {
@@ -42,7 +56,7 @@ function slugify(string) {
 }
 
 //Get All Recipe Endpoint
-app.get('/allRecipes/', function (req, res) {
+app.get('/allRecipes/', cors(corsOptions), function (req, res) {
 	const params = {
 		TableName: RECIPES_TABLE,
 	}
@@ -63,7 +77,7 @@ app.get('/allRecipes/', function (req, res) {
 })
 
 //Get Recipe Endpoint
-app.get('/recipes/:recipeShortName', function (req, res) {
+app.get('/recipes/:recipeShortName', cors(corsOptions), function (req, res) {
 	const params = {
 		TableName: RECIPES_TABLE,
 		Key: {
@@ -86,7 +100,7 @@ app.get('/recipes/:recipeShortName', function (req, res) {
 })
 
 //Add Recipe Endpoint
-app.post('/recipes', function (req, res) {
+app.post('/recipes', cors(corsOptions), function (req, res) {
 	// const { recipeShortName, name } = req.body;
 	const requestbody = req.body.body;
 	console.log(req);
@@ -106,6 +120,9 @@ app.post('/recipes', function (req, res) {
 		res.status(400).json({ error: '"name" must be a string' });
 	}
 
+	// Upload photo
+
+
 	const params = {
 		TableName: RECIPES_TABLE,
 		Item: {
@@ -117,6 +134,7 @@ app.post('/recipes', function (req, res) {
 		},
 	};
 
+	console.log('putting in dynamoDb')
 	dynamoDb.put(params, (error) => {
 		if (error) {
 			console.log(error)
@@ -124,8 +142,65 @@ app.post('/recipes', function (req, res) {
 		}
 		res.json({ recipeShortName, name, category, ingredients, steps })
 	})
+	console.log('put in dynamoDb')
 
 })
 
+
+//Upload Photo Endpoint
+app.post('/uploadphoto', cors(corsOptions), function (req, res) {
+	const s3 = new AWS.S3();  // Create a new instance of S3
+	const fileName = req.body.fileName;
+	const fileType = req.body.fileType;
+	const fileExtension = fileName.split('.')[1];
+	const contentType = 'image/'+fileExtension;
+
+	console.log('S3_BUCKET: ' + S3_BUCKET);
+	console.log('req: ' + req);
+	console.log('fileName: ' + fileName);
+	console.log('fileType: ' + fileType);
+	console.log('fileExtension: ' + fileExtension);
+	console.log('contentType: ' + contentType);
+
+	const s3Params = {
+		Bucket: S3_BUCKET,
+		Key: fileName,
+		ContentType: contentType
+	};
+
+	console.log(s3Params);
+
+ 	s3.getSignedUrl('putObject', s3Params, (err, data) => {
+		if(err){
+			console.log(err);
+			res.json({success: false, error: err})
+		} else {
+			console.log('Successfully created presigned URL');
+			console.log(data);
+		}
+	// Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved. 
+		const returnData = {
+			signedRequest: data,
+			url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+		};
+	// Send it all back
+		res.json({success:true, data:{returnData}});
+  });
+
+
+
+})
+
+//Get Recipe Endpoint
+app.get('/photo/:photoName', cors(corsOptions), function (req, res) {
+	const params = { Bucket: keys.S3_BUCKET, Key: req.params.photoName };
+
+	s3.getObject(params, function(err, data) {
+      if (err) {
+        return res.send({ error: err });
+      }
+      res.send(data.Body);
+    });
+})
 
 module.exports.handler = serverless(app);

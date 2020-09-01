@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import Image from 'material-ui-image'
+import Image from 'material-ui-image';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -23,12 +23,13 @@ const styles = theme => ({
   },
 });
 
-class AddRecipe extends Component {
+class ViewRecipe extends Component {
   state = {
   	name: "",
   	ingredients: [],
     steps: [],
     apiData: "",
+    recipeShortName: ""
   }
 
   handleChange = name => event => {
@@ -43,7 +44,7 @@ class AddRecipe extends Component {
     const path = this.props.location.pathname;
     let recipePath = path.substring(0,7) + 's/' + path.substring(8)
     console.log(recipePath)
-    axios.get('https://lf2ekvkoh6.execute-api.us-east-1.amazonaws.com/dev' + recipePath)  // http://localhost:3000
+    axios.get('https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev' + recipePath)  // http://localhost:3000
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -56,6 +57,9 @@ class AddRecipe extends Component {
         }
         if (typeof res.data.steps !== 'undefined') {
           this.setState({ steps: JSON.parse(res.data.steps)});
+        }
+        if (typeof res.data.recipeShortName !== 'undefined') {
+          this.setState({ recipeShortName: res.data.recipeShortName});
         }
         
       })
@@ -72,7 +76,7 @@ class AddRecipe extends Component {
     	        <Grid container spacing={24}>
                 <Grid item md={4}>
                     <Typography variant="h4" color="default">{this.state.name}</Typography>
-                    <Image src="https://www.culinaryhill.com/wp-content/uploads/2015/01/Chipotle-Guacamole-9-660x989.jpg" />
+                    <Image src={'https://recipes-photos-dev.s3.amazonaws.com/' + this.state.recipeShortName + '.jpg'} />
                   </Grid>
                   <Grid item xs={12} md={8}>
                     <List>
@@ -101,8 +105,8 @@ class AddRecipe extends Component {
   }
 }
 
-AddRecipe.propTypes = {
+ViewRecipe.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AddRecipe);
+export default withStyles(styles)(ViewRecipe);
