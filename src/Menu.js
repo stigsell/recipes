@@ -4,11 +4,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Image from 'material-ui-image';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
 // Router
 import { Link } from 'react-router-dom'
+
+import logo from './recipes.png';
 
 const styles = theme => ({
   root: {
@@ -32,9 +35,13 @@ class Menu extends React.Component {
 				<Toolbar>
 					<Grid justify="space-between" container spacing={24}>
 						<Grid item>
-							<Typography variant="h6" color="inherit" component={Link} to="/" className={this.props.classes.grow}>
-								Recipes
-							</Typography>
+							<Link to="/">
+								<img 
+						      		src={logo}
+						      		alt="logo"
+						      	/>
+							</Link>
+							
 						</Grid>
 						<Grid item>
 							<Button color="secondary" variant="contained" component={Link} to="/add-recipe">Add Recipe</Button>

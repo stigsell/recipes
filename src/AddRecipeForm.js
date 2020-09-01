@@ -52,6 +52,8 @@ class AddRecipeForm extends Component {
   	ingredientText: "",
   	steps: [],
   	stepText: "",
+    success: false,
+    url: ""
   }
 
   handleChange = name => event => {
@@ -60,6 +62,12 @@ class AddRecipeForm extends Component {
     });
 
   };
+
+  handleUploadChange = (ev) => {
+    console.log("handleUploadChange")
+    this.setState({success: false, url : ""});
+    
+  }
 
   onChangeName = (event) => {
     this.setState({name: event.target.value});
@@ -100,7 +108,6 @@ class AddRecipeForm extends Component {
 
   sendRecipeData = () => {
   	// event.preventDefault();
-  	console.log('hello')
   	console.log(this.state)
   	console.log(this)
 
@@ -112,10 +119,54 @@ class AddRecipeForm extends Component {
       steps: JSON.stringify(this.state.steps),
     };
     console.log(body);
-    axios.post('https://lf2ekvkoh6.execute-api.us-east-1.amazonaws.com/dev/recipes', { body })  // http://localhost:3000/recipes
+    axios.post('https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev/recipes', { body })  // https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev/recipes
     .then(res => {
     	console.log(res);
         console.log(res.data);
+    })
+  }
+
+  handleUpload = (ev) => {
+    let file = this.uploadInput.files[0];
+    // Split the filename to get the name and type
+    let fileParts = this.uploadInput.files[0].name.split('.');
+    let fileName = fileParts[0];
+    let fileExtension = fileParts[1];
+    let data = new FormData();
+    for (var i = 0; i < this.uploadInput.files.length; i++) {
+        let file = this.uploadInput.files.item(i);
+        data.append('images[' + i + ']', file, file.name);
+    }
+    
+    axios.post("https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev/uploadphoto",{  // http://localhost:3000
+      fileName : fileName+'.'+fileExtension,
+      fileType : 'image/'+fileExtension
+    })
+    .then(response => {
+      console.log(response)
+      var presignedURL = response.data.data.returnData.signedRequest;
+      var fileURL = response.data.data.returnData.url;
+      this.setState({photoUrl: fileURL})
+     // Put the fileExtension in the headers for the upload
+      var options = {
+        headers: {
+          'Content-Type': 'image/'+fileExtension
+        }
+      };
+      console.log(presignedURL)
+      console.log(file)
+      console.log(options)
+      axios.put(presignedURL, file, options)
+      .then(result => {
+        console.log("Response from s3")
+        this.setState({success: true});
+      })
+      .catch(error => {
+        console.error(error);
+      })
+    })
+    .catch(error => {
+      console.error(error);
     })
   }
 
@@ -198,30 +249,36 @@ class AddRecipeForm extends Component {
     			<form onSubmit={(e) => { e.preventDefault(); this.addStep(e); } }>
     				<ListItem>
 		      			<ListItemText primary="Steps"></ListItemText>
-		      		</ListItem>
-		      		<ListItem>
-			          <TextField
-				          id="standard-multiline-flexible"
-				          label="Instructions for this step"
-				          className={'add-recipe-text-field'}
-				          margin="dense"
-				          fullWidth
-				          onChange={this.onChangeStep}
-				          value={this.state.stepText}
-				        />
-				        <Button size="large" disabled={this.state.stepText === 0} onClick={this.addStep}>+</Button>
-			        </ListItem>
-		      		{
-      					this.state.steps.map((step, index) => <ListItem key={index}>{step}</ListItem>)
-    				}
+		      	</ListItem>
+	      		<ListItem>
+		          <TextField
+			          id="standard-multiline-flexible"
+			          label="Instructions for this step"
+			          className={'add-recipe-text-field'}
+			          margin="dense"
+			          fullWidth
+			          onChange={this.onChangeStep}
+			          value={this.state.stepText}
+			        />
+			        <Button size="large" disabled={this.state.stepText === 0} onClick={this.addStep}>+</Button>
+		        </ListItem>
+	      		{
+    					this.state.steps.map((step, index) => <ListItem key={index}>{step}</ListItem>)
+  				  }
+          </form>
+          <form onSubmit={(e) => { e.preventDefault(); this.handleUpload(e); } }>
     				<ListItem>
-		      		<input
-				        accept="image/*"
-				        className={this.props.classes.input}
-				        id="outlined-button-file"
-				        multiple
-				        type="file"
-				      />
+  	      		<input
+  			        accept="image/*"
+  			        className={this.props.classes.input}
+  			        id="outlined-button-file"
+  			        multiple
+  			        type="file"
+                onChange={this.handleUpload}
+                ref={(ref) => { this.uploadInput = ref; }}
+  			      />
+            </ListItem>
+            <ListItem>
 				      <label htmlFor="outlined-button-file">
 				        <Button variant="outlined" component="span" className={this.props.classes.button}>
 				          Upload Photo
