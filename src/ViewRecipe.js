@@ -39,19 +39,12 @@ class ViewRecipe extends Component {
   };
 
   componentDidMount() {
-    console.log('router route')
-    console.log(this.props.location)
     const path = this.props.location.pathname;
     let recipePath = path.substring(0,7) + 's/' + path.substring(8)
-    console.log(recipePath)
     axios.get('https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev' + recipePath)  // http://localhost:3000
       .then(res => {
-        console.log(res);
-        console.log(res.data);
         this.setState({ name: res.data.name });
         this.setState({ category: res.data.category });
-        console.log(res.data.ingredients)
-        console.log(JSON.parse(res.data.ingredients))
         if (typeof res.data.ingredients !== 'undefined') {
           this.setState({ ingredients: JSON.parse(res.data.ingredients)});
         }

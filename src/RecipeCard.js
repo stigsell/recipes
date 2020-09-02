@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import axios from 'axios';
 
 const styles = theme => ({
     card: {
@@ -29,18 +28,9 @@ class RecipeCard extends React.Component {
        imgSrc:  '',
   };
   componentDidMount() {
-        // axios.get('https://lf2ekvkoh6.execute-api.us-east-1.amazonaws.com/dev' + 'photo/' + slug)  // http://localhost:3000
-      //   axios.get('https://' + 'recipes-photos-dev' + '.s3.amazonaws.com/' + this.slug + '.jpg')  // http://localhost:3000
-      //     .then(res => {
-      //       console.log(res);
-      //       this.setState({ imgSrc: res.config.url });
-            
-      // })
      }
 	constructor(props) {
 		super(props);
-    console.log('props!')
-    console.log(props)
 		this.classes = styles;
 		this.card = props.card;
 		this.name = props.name;
@@ -49,7 +39,6 @@ class RecipeCard extends React.Component {
 			this.slug = 'not-found';
 		}
 		this.url = "/recipe/" + this.slug;
-    console.log(this.state.imgSrc);
 	}
 	render() {
 		return (

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
@@ -49,12 +48,9 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev/allRecipes')  // http://localhost:3000/allRecipes
+    axios.get('https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev/allRecipes')  //http://localhost:3000/allRecipes
       .then(res => {
-        console.log(res);
-        console.log(res.data);
         this.setState({ cards: res.data.result.Items });
-        console.log(this.state.cards)
       })
   }
   render() {
