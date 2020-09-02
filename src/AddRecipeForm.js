@@ -9,9 +9,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
-import { green, red } from '@material-ui/core/colors';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { green, red, grey } from '@material-ui/core/colors';
 import axios from 'axios';
 
 const styles = theme => ({
@@ -97,6 +99,14 @@ class AddRecipeForm extends Component {
   	}
   }
 
+  removeIngredient = (ingredient) => {
+    const index = this.state.ingredients.indexOf(ingredient);
+    if (index > -1) {
+      const newIngredients = this.state.ingredients.filter((ing) => ing !== ingredient)
+      this.setState({ingredients: newIngredients})
+    }
+  }
+
   addStep = (e) => {
   	e.preventDefault();
   	if(this.state.stepText.length > 0) {
@@ -104,6 +114,14 @@ class AddRecipeForm extends Component {
   		this.state.steps.push(this.state.steps.length + 1 +  ". " + this.state.stepText);  // Add numbers to steps
   		this.setState({stepText: ""});
   	}
+  }
+
+  removeStep = (step) => {
+    const index = this.state.steps.indexOf(step);
+    if (index > -1) {
+      const newSteps = this.state.steps.filter((s) => s !== step)
+      this.setState({steps: newSteps})
+    }
   }
 
   sendRecipeData = () => {
@@ -253,8 +271,16 @@ class AddRecipeForm extends Component {
 				        <Button size="large" disabled={this.state.ingredientText === 0} onClick={this.addIngredient}>+</Button>
 			        </ListItem>
 			        {
-      					this.state.ingredients.map((ingredient, index) => <ListItem key={index}>{ingredient}</ListItem>)
-    				}
+      					this.state.ingredients.map((ingredient, index) => { return(
+                  <React.Fragment>
+                    <ListItem key={index}>{ingredient}
+                      <IconButton aria-label="delete" disableRipple="true" onClick={() => this.removeIngredient(ingredient)}>
+                        <DeleteIcon fontSize="medium" style={{ color: grey[500] }} />
+                      </IconButton>
+                     </ListItem>
+                  </React.Fragment>
+                )})
+    				  }
     			</form>
     			<form onSubmit={(e) => { e.preventDefault(); this.addStep(e); } }>
     				<ListItem>
@@ -273,7 +299,15 @@ class AddRecipeForm extends Component {
 			        <Button size="large" disabled={this.state.stepText === 0} onClick={this.addStep}>+</Button>
 		        </ListItem>
 	      		{
-    					this.state.steps.map((step, index) => <ListItem key={index}>{step}</ListItem>)
+    					this.state.steps.map((step, index) => { return(
+                <React.Fragment>
+                  <ListItem key={index}>{step}
+                    <IconButton aria-label="delete" disableRipple="true" onClick={() => this.removeStep(step)}>
+                        <DeleteIcon fontSize="medium" style={{ color: grey[500] }} />
+                    </IconButton>
+                  </ListItem>
+                </React.Fragment>
+                )})
   				  }
           </form>
           <form onSubmit={(e) => { e.preventDefault(); this.handleUpload(e); } }>
