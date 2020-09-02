@@ -62,6 +62,21 @@ class AddRecipeForm extends Component {
     url: ""
   }
 
+  // Source: https://medium.com/@mhagemann/the-ultimate-way-to-slugify-a-url-string-in-javascript-b8e4a0d849e1
+  slugify = (string) => {
+    const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœṕŕßśșțùúüûǘẃẍÿź·/_,:;'
+    const b = 'aaaaaaaaceeeeghiiiimnnnoooooprssstuuuuuwxyz------'
+    const p = new RegExp(a.split('').join('|'), 'g')
+    return string.toString().toLowerCase()
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+      .replace(/&/g, '-and-') // Replace & with ‘and’
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/\-\-+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
@@ -163,6 +178,13 @@ class AddRecipeForm extends Component {
         let file = this.uploadInput.files.item(i);
         data.append('images[' + i + ']', file, file.name);
     }
+    console.log('fileName before')
+    console.log(fileName)
+    fileName = this.slugify(this.state.name)
+    fileExtension = 'jpg'
+    console.log(fileName)
+    console.log(fileExtension)
+    console.log(file)
     
     axios.post("https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev/uploadphoto",{  // http://localhost:3000
       fileName : fileName+'.'+fileExtension,
