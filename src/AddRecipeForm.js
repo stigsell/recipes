@@ -93,10 +93,8 @@ class AddRecipeForm extends Component {
   	e.preventDefault();
   	if(this.state.ingredientText.length > 0) {
   		this.state.ingredients.push(this.state.ingredientText)
-  		console.log(this.state.ingredients)
   		this.setState({ingredientText: ""});
   	}
-  	console.log(this.state)
   }
 
   addStep = (e) => {
@@ -104,10 +102,8 @@ class AddRecipeForm extends Component {
   	if(this.state.stepText.length > 0) {
 
   		this.state.steps.push(this.state.steps.length + 1 +  ". " + this.state.stepText);  // Add numbers to steps
-  		console.log(this.state.steps)
   		this.setState({stepText: ""});
   	}
-  	console.log(this.state)
   }
 
   sendRecipeData = () => {
@@ -125,7 +121,15 @@ class AddRecipeForm extends Component {
     console.log(body);
     axios.post('https://bqdu4pltqh.execute-api.us-east-1.amazonaws.com/dev/recipes', { body })  // http://localhost:3000/recipes
     .then(res => {
-    	console.log(res);
+      if(res.status === 200){
+        console.log("Successfully added recipe");
+        console.log(res);
+        window.location.replace("http://localhost:3001");
+      } else {
+        console.log("Error adding recipe");
+        console.log(res);
+      }
+    	
         console.log(res.data);
     })
   }
@@ -291,10 +295,10 @@ class AddRecipeForm extends Component {
 				        </Button>
 				      </label>
               {
-                this.state.photoUploadStatus == "SUCCESS" ? <CheckIcon fontSize="large" style={{ color: green[500] }} /> : null
+                this.state.photoUploadStatus === "SUCCESS" ? <CheckIcon fontSize="large" style={{ color: green[500] }} /> : null
               }
               {
-                this.state.photoUploadStatus == "FAILURE" ? <CloseIcon fontSize="large" style={{ color: red[500] }} /> : null
+                this.state.photoUploadStatus === "FAILURE" ? <CloseIcon fontSize="large" style={{ color: red[500] }} /> : null
               }
 	      		</ListItem>
 			    </form>
