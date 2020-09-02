@@ -9,6 +9,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import { green, red } from '@material-ui/core/colors';
 import axios from 'axios';
 
 const styles = theme => ({
@@ -29,6 +32,7 @@ const styles = theme => ({
   addRecipeDropdown: {
   	width: 350,
   },
+  spacing: 4
 });
 
 const categories = [
@@ -52,7 +56,7 @@ class AddRecipeForm extends Component {
   	ingredientText: "",
   	steps: [],
   	stepText: "",
-    success: false,
+    photoUploadStatus: "PENDING",
     url: ""
   }
 
@@ -158,15 +162,17 @@ class AddRecipeForm extends Component {
       console.log(options)
       axios.put(presignedURL, file, options)
       .then(result => {
-        console.log("Response from s3")
-        this.setState({success: true});
+        console.log("Successful photo upload")
+        this.setState({photoUploadStatus: "SUCCESS"});
       })
       .catch(error => {
         console.error(error);
+        this.setState({photoUploadStatus: "FAILURE"});
       })
     })
     .catch(error => {
       console.error(error);
+      this.setState({photoUploadStatus: "FAILURE"});
     })
   }
 
@@ -284,6 +290,12 @@ class AddRecipeForm extends Component {
 				          Upload Photo
 				        </Button>
 				      </label>
+              {
+                this.state.photoUploadStatus == "SUCCESS" ? <CheckIcon fontSize="large" style={{ color: green[500] }} /> : null
+              }
+              {
+                this.state.photoUploadStatus == "FAILURE" ? <CloseIcon fontSize="large" style={{ color: red[500] }} /> : null
+              }
 	      		</ListItem>
 			    </form>
 	      	</List>
