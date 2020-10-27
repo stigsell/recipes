@@ -19,6 +19,9 @@ const styles = theme => ({
   	flexGrow: 1,
   	textDecoration: 'none',
   },
+  button: {
+  	marginTop: 10
+  }
 });
 
 class Menu extends React.Component {
@@ -42,7 +45,7 @@ class Menu extends React.Component {
 							
 						</Grid>
 						<Grid item>
-							<Button color="secondary" variant="contained" component={Link} to="/add-recipe">Add Recipe</Button>
+							<Button color="secondary" className={this.props.classes.button} variant="contained" component={Link} to="/add-recipe">Add Recipe</Button>
 						</Grid>
 					</Grid>
 				</Toolbar>
