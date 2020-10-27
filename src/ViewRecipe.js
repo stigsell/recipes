@@ -19,8 +19,12 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
+    margin: 20
   },
+  title: {
+    marginBottom: 20
+  }
 });
 
 class ViewRecipe extends Component {
@@ -66,9 +70,9 @@ class ViewRecipe extends Component {
 	        </Grid>
 	        <Grid item sm={12} md={8}>
 	          <Paper className={this.props.classes.paper}>
+              <Typography variant="h4" color="default" className={this.props.classes.title}>{this.state.name}</Typography>
     	        <Grid container spacing={24}>
-                <Grid item md={4}>
-                    <Typography variant="h4" color="default">{this.state.name}</Typography>
+                <Grid item xs={12} md={4}>
                     <Image src={'https://recipes-photos-dev.s3.amazonaws.com/' + this.state.recipeShortName + '.jpg'} />
                   </Grid>
                   <Grid item xs={12} md={8}>
