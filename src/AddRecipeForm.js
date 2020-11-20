@@ -157,7 +157,12 @@ class AddRecipeForm extends Component {
       if(res.status === 200){
         console.log("Successfully added recipe");
         console.log(res);
-        window.location.replace("http://localhost:3001");
+        if(window.location.host == "localhost:3001"){
+          window.location.replace("http://localhost:3001"); 
+        } else {
+          window.location.replace("http://recipes.stig.co");
+        }
+        
       } else {
         console.log("Error adding recipe");
         console.log(res);
